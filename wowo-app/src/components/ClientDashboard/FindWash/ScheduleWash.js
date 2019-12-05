@@ -13,9 +13,14 @@ class Schedule extends Component {
 
 
     render() { 
-        return ( <div className='s'>
+        return ( 
+        <div className='s'>
             <SingleDatePicker
-  date={this.state.date} // momentPropTypes.momentObj or null
+            showDefaultInputIcon
+            showClearDate
+            reopenPickerOnClearDate
+            orientation="vertical"
+            date={this.state.date} // momentPropTypes.momentObj or null
   onDateChange={date => this.setState({ date })} // PropTypes.func.isRequired
   focused={this.state.focused} // PropTypes.bool
   onFocusChange={({ focused }) => this.setState({ focused })} // PropTypes.func.isRequired
