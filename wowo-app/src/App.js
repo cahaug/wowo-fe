@@ -5,6 +5,9 @@ import LandingPage from './components/landingpage/LandingPage.js';
 import Login from './components/login/Login.js';
 import UserSignUp from './components/UserSignup/UserSignup';
 import WasherSignUp from './components/WasherSignUp/WasherSignUpForm';
+
+import Schedule from './components/ClientDashboard/FindWash/ScheduleWash';
+
 import './App.css';
 
 const GlobalStyle = createGlobalStyle`
@@ -12,7 +15,8 @@ const GlobalStyle = createGlobalStyle`
 
     html, body {
         font-family: 'Open Sans', sans-serif !important;
-    }
+    }import Schedule from './components/ClientDashboard/FindWash/ScheduleWash';
+
 
     #root {
         min-height: 100vh;
@@ -36,9 +40,13 @@ function App() {
 				<Route path="/user-register" component={UserSignUp} />
 				<Route path="/login" render={() => <Login />} />
 				<Route path="/washer-register" component={WasherSignUp} />
+				<Route path="/schedule" component={Schedule} />
+				
+
 			</Switch>
 		</Container>
 	);
 }
 
 export default App;
+ 
