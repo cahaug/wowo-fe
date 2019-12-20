@@ -24,10 +24,20 @@ export default function LandingPage() {
 							Sign Up{' '}
 						</MDBBtn>
 					</Link>
-					<p className="btn-or">or</p>
+					<Link to="github-register">
+						<MDBBtn className="github-sign-up-btn" color="grey">
+							<i className="fab fa-github left" />
+							GITHUB
+						</MDBBtn>
+					</Link>
+					{/* <p className="btn-or">or</p> */}
 					<Link to="login">
 						<MDBBtn className="login-btn"> Log In </MDBBtn>
 					</Link>
+					{/* <p className="btn-or">or</p> */}
+					{/* <Link to="github">
+						<MDBBtn className="login-btn"> GIT </MDBBtn>
+					</Link> */}
 				</MDBContainer>
 			</section>
 

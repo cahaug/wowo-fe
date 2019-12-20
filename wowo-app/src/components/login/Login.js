@@ -1,18 +1,18 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { Link, withRouter } from "react-router-dom";
-import { loginUser } from "../../actions/actionTypes.js";
-import { MDBContainer, MDBRow, MDBCol, MDBInput, MDBBtn } from "mdbreact";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { Link, withRouter } from 'react-router-dom';
+import { loginUser } from '../../actions/actionTypes.js';
+import { MDBContainer, MDBRow, MDBCol, MDBInput, MDBBtn } from 'mdbreact';
 
-import Styled from "styled-components";
-import carImg from "../../images/undraw_city_driver_jh2h.svg";
-import LoginLogo from "../../images/wowo-logo-word-full.svg";
+import Styled from 'styled-components';
+import carImg from '../../images/undraw_city_driver_jh2h.svg';
+import LoginLogo from '../../images/wowo-logo-word-full.svg';
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFacebookF, faGoogle } from "@fortawesome/free-brands-svg-icons";
-import "@fortawesome/fontawesome-free/css/all.min.css";
-import "bootstrap-css-only/css/bootstrap.min.css";
-import "mdbreact/dist/css/mdb.css";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faFacebookF, faGoogle } from '@fortawesome/free-brands-svg-icons';
+import '@fortawesome/fontawesome-free/css/all.min.css';
+import 'bootstrap-css-only/css/bootstrap.min.css';
+import 'mdbreact/dist/css/mdb.css';
 
 const LoginContainer = Styled.div`
     display: flex;
@@ -127,155 +127,155 @@ const SocialLogin = Styled.p`
 `;
 
 class Login extends Component {
-  constructor() {
-    super();
-    this.state = {
-      email: "",
-      password: "",
-      show: false,
-      user: null,
-    };
-  }
+	constructor() {
+		super();
+		this.state = {
+			email: '',
+			password: '',
+			show: false,
+			user: null
+		};
+	}
 
-  inputHandler = event => {
-    event.preventDefault();
+	inputHandler = (event) => {
+		event.preventDefault();
 
-    this.setState({
-      ...this.state,
-      [event.target.name]: event.target.value
-    });
-  };
+		this.setState({
+			...this.state,
+			[event.target.name]: event.target.value
+		});
+	};
 
-  showHandler = event => {
-    event.preventDefault();
-    if (this.state.show === false) {
-      this.setState({ show: true });
-    } else {
-      this.setState({ show: false });
-    }
-  };
+	showHandler = (event) => {
+		event.preventDefault();
+		if (this.state.show === false) {
+			this.setState({ show: true });
+		} else {
+			this.setState({ show: false });
+		}
+	};
 
-  handleSubmit = event => {
-    event.preventDefault();
+	handleSubmit = (event) => {
+		event.preventDefault();
 
-    const { email, password } = this.state;
-    this.props
-      .loginUser(email, password)
-      .then((res) => {
-        // console.log("washer", this.state);
-        const userType = localStorage.getItem('userType');
-        // console.log("userType", userType);
-        if(userType === 'washer') {
-          this.props.history.push("/washerDash");
-        } else if (userType === 'client') {
-          this.props.history.push("/userDash");
-        } else {
-          return null;
-        }
-      })
-      .catch(err => {
-        throw new Error(err);
-      });
-  };
+		const { email, password } = this.state;
+		this.props
+			.loginUser(email, password)
+			.then((res) => {
+				// console.log("washer", this.state);
+				const userType = localStorage.getItem('userType');
+				// console.log("userType", userType);
+				if (userType === 'washer') {
+					this.props.history.push('/washerDash');
+				} else if (userType === 'client') {
+					this.props.history.push('/userDash');
+				} else {
+					return null;
+				}
+			})
+			.catch((err) => {
+				throw new Error(err);
+			});
+	};
 
-  render() {
-    return (
-      <LoginContainer>
-        <LeftContainer>
-          <ImgContainer>
-            <img src={carImg} style={{ width: 90 + "%" }} alt="login screen" />
-          </ImgContainer>
-        </LeftContainer>
+	render() {
+		return (
+			<LoginContainer>
+				<LeftContainer>
+					<ImgContainer>
+						<img src={carImg} style={{ width: 90 + '%' }} alt="login screen" />
+					</ImgContainer>
+				</LeftContainer>
 
-        <RightContainer>
-          <Form onSubmit={this.handleSubmit}>
-            <Link to="/">
-              <Img src={LoginLogo} style={{ width: 40 + "%" }} alt="logo" />
-            </Link> 
+				<RightContainer>
+					<Form onSubmit={this.handleSubmit}>
+						<Link to="/">
+							<Img src={LoginLogo} style={{ width: 40 + '%' }} alt="logo" />
+						</Link>
 
-            <MDBCol md="12">
-              <MDBInput
-                label="Email"
-                aria-required="true"
-                autoCapitalize="off"
-                autoCorrect="off"
-                maxLength="75"
-                name="email"
-                type="text"
-                value={this.state.email}
-                onChange={this.inputHandler}
-              />
-            </MDBCol>
+						<MDBCol md="12">
+							<MDBInput
+								label="Email"
+								aria-required="true"
+								autoCapitalize="off"
+								autoCorrect="off"
+								maxLength="75"
+								name="email"
+								type="text"
+								value={this.state.email}
+								onChange={this.inputHandler}
+							/>
+						</MDBCol>
 
-            <MDBCol md="12">
-              <MDBInput
-                label="Password"
-                aria-required="true"
-                autoCapitalize="off"
-                autoCorrect="off"
-                name="password"
-                type={this.state.show === false ? "password" : "text"}
-                value={this.state.password}
-                onChange={this.inputHandler}
-              />
+						<MDBCol md="12">
+							<MDBInput
+								label="Password"
+								aria-required="true"
+								autoCapitalize="off"
+								autoCorrect="off"
+								name="password"
+								type={this.state.show === false ? 'password' : 'text'}
+								value={this.state.password}
+								onChange={this.inputHandler}
+							/>
 
-              <ShowButton onClick={this.showHandler}>
-                {this.state.show === false ? "Show" : "Hide"}
-              </ShowButton>
-            </MDBCol>
+							<ShowButton onClick={this.showHandler}>
+								{this.state.show === false ? 'Show' : 'Hide'}
+							</ShowButton>
+						</MDBCol>
 
-            <Link to="/forgotPassword">
-              <Forgot>Forgot Password?</Forgot>
-            </Link>
+						<Link to="/forgotPassword">
+							<Forgot>Forgot Password?</Forgot>
+						</Link>
 
-            <SubmitContainer>
-              <MDBBtn color="info" type="submit">
-                Login
-              </MDBBtn>
-            </SubmitContainer>
-          </Form>
+						<SubmitContainer>
+							<MDBBtn color="info" type="submit">
+								Login
+							</MDBBtn>
+						</SubmitContainer>
+					</Form>
 
-          <MDBContainer>
-            <SocialLogin>or login via:</SocialLogin>
+					<MDBContainer>
+						<SocialLogin>or login via:</SocialLogin>
 
-            <MDBRow center>
-              <Link to="/facebookAuth">
-                <SocialButton>
-                  <FontAwesomeIcon icon={faFacebookF} />
-                </SocialButton>
-              </Link>
+						<MDBRow center>
+							<Link to="/facebookAuth">
+								<SocialButton>
+									<FontAwesomeIcon icon={faFacebookF} />
+								</SocialButton>
+							</Link>
 
-              <Link to="/googleAuth">
-                <SocialButton>
-                  <FontAwesomeIcon icon={faGoogle} />
-                </SocialButton>
-              </Link>
-            </MDBRow>
+							<Link to="/googleAuth">
+								<SocialButton>
+									<FontAwesomeIcon icon={faGoogle} />
+								</SocialButton>
+							</Link>
+							<Link to="/googleAuth">
+								<SocialButton>
+									<FontAwesomeIcon icon={faGoogle} />
+								</SocialButton>
+							</Link>
+						</MDBRow>
 
-            <FirstTime>
-              Here For the first time?{" "}
-              <Link to="/user-register">
-                <Signup>Sign Up</Signup>
-              </Link>
-            </FirstTime>
-          </MDBContainer>
-        </RightContainer>
-      </LoginContainer>
-    );
-  }
+						<FirstTime>
+							Here For the first time?{' '}
+							<Link to="/user-register">
+								<Signup>Sign Up</Signup>
+							</Link>
+						</FirstTime>
+					</MDBContainer>
+				</RightContainer>
+			</LoginContainer>
+		);
+	}
 }
 
-const mapStateToProps = state => ({
-  user: state.user
+const mapStateToProps = (state) => ({
+	user: state.user
 });
 
 const mapDispatchToProps = {
-  loginUser
+	loginUser
 };
 
-export default withRouter(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(Login)
-);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Login));
