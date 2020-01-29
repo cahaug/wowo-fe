@@ -2,8 +2,8 @@
 
 [build]
   base    = "./wowo-app"
-  publish = "./wowo-app/build"
-  command = "yarn build" 
+  publish = "./wowo-app/build/"
+  command = "npm run build" 
 
 [[redirects]]
   from = "/*"
