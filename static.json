@@ -1,0 +1,6 @@
+{
+    "root": "build/",
+    "routes": {
+      "/**": "/wowo-app/public/index.html"
+    }
+  }
