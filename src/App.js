@@ -12,7 +12,7 @@ import WasherSignUp from "./components/WasherSignUp/WasherSignUpForm";
 import ScheduleWash from "./components/ClientDashboard/FindWash/ScheduleWash";
 import ScheduleWash2 from "./components/ClientDashboard/FindWash/ScheduleWash2";
 import ClientNavigation from "./components/ClientDashboard/Navigation.js";
-
+import AddCar from "./components/AddCar/AddCar";
 import ClientVehicles from "./components/ClientDashboard/Vehicles/Vehicles.js";
 
 import ClientPayment from "./components/ClientDashboard/Payment.js";
@@ -58,6 +58,7 @@ function App(props) {
         <Switch>
           <Route exact path="/" component={LandingPage} />
    		  <Route path="/instantQuote" component={QuoteGenerator} />
+		  <Route path="/AddCar" component={AddCar} />
           <Route exact path="/user-register" component={UserSignUp} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/find-wash" component={FindWash} />

@@ -5,9 +5,11 @@ import { withRouter } from "react-router-dom";
 import axios from 'axios';
 
 
-class QuoteGenerator extends Component {
+class AddCar extends Component {
     constructor(props) {
         super(props);
+        this.handleChangePlate = this.handleChangePlate.bind(this);
+        this.handleChangeColor = this.handleChangeColor.bind(this);
         this.handleChangeDocs = this.handleChangeDocs.bind(this);
         this.handleChangeDocs2 = this.handleChangeDocs2.bind(this);
         this.handleSubmitMake = this.handleSubmitMake.bind(this);
@@ -90,6 +92,8 @@ class QuoteGenerator extends Component {
             selectedMake:'Acura',
             selectedModel: '',
             pricingInfo: '',
+            carColor:'',
+            licensePlate: '',
         }
     }
 
@@ -293,11 +297,19 @@ class QuoteGenerator extends Component {
         } 
     }
 
-    handleChangeClassic = (evt) => {
+    handleChangePlate = (evt) => {
         evt.preventDefault()
-        // console.log('handleChangeClassic'+ evt.target.value)
+        // console.log('handleChange'+ evt.target.value)
         this.setState({
-            [evt.target.name]: evt.target.value,
+            licensePlate: evt.target.value,
+        })
+    }
+
+    handleChangeColor = (evt) => {
+        evt.preventDefault()
+        // console.log('handleChange'+ evt.target.value)
+        this.setState({
+            carColor: evt.target.value,
         })
     }
 
@@ -313,15 +325,31 @@ class QuoteGenerator extends Component {
         })
     }
 
-    handleSubmit = (evt) => {
-        evt.preventDefault()
-        const { id, carId, color, licensePlate } = this.state
+    // handleSubmit = (evt) => {
+    //     evt.preventDefault()
+    //     const { id, carId, color, licensePlate } = this.state
 
-        this.props.addACar(id, carId, color, licensePlate)
-            .then(() => {
-                alert('successfully added car')
-            })
-            .catch((err) => { console.error(err) })
+    //     this.props.addACar(id, carId, color, licensePlate)
+    //         .then(() => {
+    //             alert('successfully added car')
+    //         })
+    //         .catch((err) => { console.error(err) })
+    // }
+
+    handleSubmitCar = (evt) => {
+        evt.preventDefault()
+        const id = '1'
+        // const id = localStorage.getItem('id')
+        const carId = this.state.pricingInfo.carId
+        const color = this.state.carColor
+        const licensePlate = this.state.licensePlate
+        axios.post('https://pt6-wowo.herokuapp.com/carsPG/addACar', { 'id':id, 'carId':carId, 'color':color, 'licensePlate':licensePlate })
+        .then(res => {
+            // console.log(res.data)
+            alert(`Car Successfully Added to User Profile ID: ${id}`)
+            this.setState({carColor:'',licensePlate:''})
+        })
+        .catch(err => console.log(err))
     }
 
     handleSubmitMake = (evt) => {
@@ -365,7 +393,7 @@ class QuoteGenerator extends Component {
         // const { isLoading, } = this.props
         return (
             <div>
-                <h3>Get a Quote:</h3>
+                <h3>Add Your Car:</h3>
                 <form onSubmit={this.handleSubmitMake}>
                     <label>
                         Pick the Make of Your Car:
@@ -395,13 +423,23 @@ class QuoteGenerator extends Component {
                     <div>
                         <h3><strong>{this.state.pricingInfo.make} <br /> {this.state.pricingInfo.model}</strong></h3>
                         <p><strong>Vehicle Type:</strong> {this.categoryMuxer(this.state.pricingInfo.category)} <br /> <strong>Size Category:</strong> {this.letterTranslator(this.state.pricingInfo.size)}</p>
-                        <h4>
+                        {/* <h4>
                             <strong>Basic Wash:</strong> {this.basicPrice(this.state.pricingInfo)}
                             <br />
                             <strong>Premium Wash:</strong> {this.premiumPrice(this.state.pricingInfo)}
                             <br />
                             <strong>Supreme Wash:</strong> {this.supremePrice(this.state.pricingInfo)}
-                        </h4>
+                        </h4> */}
+                        <form onSubmit={this.handleSubmitCar}>
+                                Add A Car to Your Profile: <br />
+                            <label> Car Color:
+                                <input type="text" value={this.state.carColor} onChange={this.handleChangeColor}></input>
+                            </label>
+                            <label> License Plate:
+                                <input type="text" value={this.state.licensePlate} onChange={this.handleChangePlate}></input>
+                            </label>
+                            <button onClick={this.handleSubmitCar}>Add Car to Profile</button>
+                        </form>
 
                     </div>
                 : <p></p>
@@ -426,5 +464,5 @@ export default withRouter(
     connect(
         mapStateToProps,
         mapDispatchToProps
-    )(QuoteGenerator)
+    )(AddCar)
 );
